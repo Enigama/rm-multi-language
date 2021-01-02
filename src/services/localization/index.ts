@@ -7,6 +7,17 @@ import {initReactI18next} from 'react-i18next';
 import AsyncStorage from '@react-native-community/async-storage';
 import * as RNLocalize from 'react-native-localize';
 
+//import locales
+import en from './en';
+import ru from './ru';
+
+export const AVAILABLE_LANGUAGES = {
+  en,
+  ru,
+};
+
+const AVALAILABLE_LANG_CODES = Object.keys(AVAILABLE_LANGUAGES);
+
 const languageDetector: LanguageDetectorAsyncModule = {
   type: 'languageDetector',
   // If this is set to true, your detect function receives a callback function that you should call with your language,
@@ -30,7 +41,7 @@ const languageDetector: LanguageDetectorAsyncModule = {
             'No language is set, choosing the best available or English as fallback',
           );
         }
-        const bestLng = RNLocalize.findBestAvailableLanguage(['ru', 'en']);
+        const bestLng = RNLocalize.findBestAvailableLanguage(AVALAILABLE_LANG_CODES,);
 
         callback(bestLng?.languageTag ?? 'ru');
         return;
@@ -47,18 +58,7 @@ i18n
   .use(languageDetector)
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
-    resources: {
-      en: {
-        translation: {
-          'Welcome to React': 'Welcome to React and react-i18next',
-        },
-      },
-      ru: {
-        translation: {
-          'Welcome to React': 'Добро пожаловать в Реакт',
-        },
-      },
-    },
+    resources: AVAILABLE_LANGUAGES,
     react: {
       useSuspense: false,
     },

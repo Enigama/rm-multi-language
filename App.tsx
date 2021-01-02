@@ -22,7 +22,7 @@ const App = () => {
       <SafeAreaView>
         <View>
           <Text>Choice Language</Text>
-          <Text>{t('Welcome to React')}</Text>
+          <Text>{t('common:hello')}</Text>
 
           {LANGS.map((l) => {
             const selected = l.lngCode === selectedLngCode;
